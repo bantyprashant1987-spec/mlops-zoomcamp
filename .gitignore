@@ -206,3 +206,23 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 *.sh
+# ML / MLOps additions
+
+# Model artifacts
+models/
+*.bin
+*.pkl
+
+# Data files (important later)
+data/
+*.parquet
+*.csv
+
+# MLflow
+mlruns/
+
+# Large files
+*.sh
+
+# OS / misc
+.DS_Store
