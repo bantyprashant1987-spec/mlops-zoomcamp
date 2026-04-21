@@ -199,6 +199,12 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
+# Local homework artifacts (experiment tracking)
+03-training/experiment_tracking/artifacts/
+03-training/experiment_tracking/preprocessor/
+03-training/experiment_tracking/*.code-workspace
+01-intro/homework.pdf
+
 # Cursor
 #  Cursor is an AI-powered code editor. `.cursorignore` specifies files/directories to
 #  exclude from AI features like autocomplete and code analysis. Recommended for sensitive data
