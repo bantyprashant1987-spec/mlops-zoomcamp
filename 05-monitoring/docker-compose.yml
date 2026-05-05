@@ -1,0 +1,49 @@
+version: "3.8"
+
+volumes:
+  postgres_data: {}
+  grafana_data: {}
+
+networks:
+  front-tier:
+  back-tier:
+
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      #POSTGRES_DB: test
+    ports:
+      - "5432:5432"
+    #volumes:
+    #  - postgres_data:/var/lib/postgresql/data
+    networks:
+      - back-tier
+
+  grafana:
+    image: grafana/grafana:latest
+    user: "472"
+    container_name: monitoring-grafana
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./config/grafana_datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml:ro
+      #- grafana_data:/var/lib/grafana
+      #- ./dashboards:/var/lib/grafana/dashboards
+    networks:
+      - back-tier   # ✅ FIX ADDED
+
+  adminer:
+    image: adminer:latest
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - front-tier
+      - back-tier
